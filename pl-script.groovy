@@ -1,3 +1,5 @@
+def dockerImage
+
 def checkoutCode() {
     git 'https://github.com/gornication/hrs_lab.git'
 }

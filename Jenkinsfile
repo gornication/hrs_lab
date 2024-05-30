@@ -7,6 +7,15 @@ pipeline {
     }
 
     stages {
+        stage('Debug') {
+            steps {
+                script {
+                    echo 'Loading script...'
+                    load 'pl-script.groovy'
+                    echo 'Script loaded successfully!'
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 script {

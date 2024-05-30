@@ -1,32 +1,60 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('gornication-pipeline-lab-1')
+        DOCKER_HUB_REPO = 'gornication/pipeline-lab-1'
+    }
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'building app...'
+                script {
+                    load 'pl-script.groovy'
+                    checkoutCode()
+                }
             }
         }
 
-        stage('Test') {
+        stage('Syntax Check') {
             steps {
-                echo 'testing app...'
+                script {
+                    syntaxCheck()
+                }
             }
         }
 
-        stage('Deploy') {
+        stage('Build Docker Image') {
             steps {
-                echo 'deploying app...'
+                script {
+                    buildDockerImage()
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    pushDockerImage()
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    deployToKubernetes()
+                }
             }
         }
     }
 
     post {
         success {
-            echo '*******SUCCESS********'
+            echo 'Pipeline completed successfully!'
         }
         failure {
-            echo '!!!!!!!!FAILED!!!!!!!'
+            echo 'Pipeline failed.'
         }
     }
 }

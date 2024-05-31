@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
     agent any
 
@@ -7,19 +9,17 @@ pipeline {
     }
 
     stages {
-        stage('Load Script') {
+        stage('init') {
             steps {
                 script {
-                    echo 'Loading script...'
-                    load 'pl-script.groovy'
-                    echo 'Script loaded successfully!'
+                    gv = load 'pl-script.groovy'
                 }
             }
         }
         stage('Checkout') {
             steps {
                 script {
-                    checkoutCode()
+                    gv.checkoutCode()
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Syntax Check') {
             steps {
                 script {
-                    syntaxCheck()
+                    gv.syntaxCheck()
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    buildDockerImage()
+                    gv.buildDockerImage()
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    pushDockerImage()
+                    gv.pushDockerImage()
                 }
             }
         }
@@ -51,7 +51,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    deployToKubernetes()
+                    gv.deployToKubernetes()
                 }
             }
         }

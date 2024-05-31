@@ -22,7 +22,6 @@ def pushDockerImage() {
 }
 
 def deployToKubernetes() {
-    // Deploy to Kubernetes
     sh """
     kubectl set image deployment/your-deployment-name your-container-name=${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}
     kubectl rollout status deployment/your-deployment-name

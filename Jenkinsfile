@@ -7,7 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Debug') {
+        stage('Load Script') {
             steps {
                 script {
                     echo 'Loading script...'
@@ -19,7 +19,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    load 'pl-script.groovy'
                     checkoutCode()
                 }
             }

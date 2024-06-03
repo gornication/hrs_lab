@@ -33,7 +33,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    gv.buildDockerImage()
+                    dockerImage = gv.buildDockerImage().call()
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    gv.pushDockerImage()
+                    gv.pushDockerImage(dockerImage).call()
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    gv.deployToKubernetes()
+                    gv.deployToKubernetes().call()
                 }
             }
         }

@@ -6,7 +6,7 @@ gv.checkoutCode = {
 }
 
 gv.syntaxCheck = {
-    sh 'python -m py_compile $(find . -name "*.py")'
+    sh 'python3 -m py_compile $(find . -name "*.py")'
 }
 
 gv.buildDockerImage = {

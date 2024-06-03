@@ -16,7 +16,14 @@ gv.buildDockerImage = {
 }
 
 gv.pushDockerImage = { dockerImage ->
-    docker.withRegistry('https://index.docker.io/v1/', 'gornication-pipeline-lab-1') {
+    // Extract Docker Hub username and password from credentials
+    def credentials = credentials('gornication-pipeline-lab-1')
+    def username = credentials?.username
+    def password = credentials?.password
+
+    // Perform Docker login using credentials
+    withDockerRegistry([credentialsId: 'gornication-pipeline-lab-1', url: 'https://index.docker.io/v1/']) {
+        sh "echo ${password} | docker login -u ${username} --password-stdin"
         dockerImage.push("${env.BUILD_NUMBER}")
         dockerImage.push("latest")
         echo "Docker Image pushed: ${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"

@@ -2,7 +2,7 @@
 def gv = [:]
 
 gv.checkoutCode = {
-    git 'https://github.com/gornication/hrs_lab.git'
+    git branch: 'main', url: 'https://github.com/gornication/hrs_lab.git'
 }
 
 gv.syntaxCheck = {

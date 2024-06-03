@@ -10,7 +10,7 @@ gv.syntaxCheck = {
 }
 
 gv.buildDockerImage = {
-    def dockerImage = sh(script: '/usr/local/bin/docker build -t ${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER} .', returnStdout: true).trim()
+    def dockerImage = sh(script: "/usr/local/bin/docker build -t ${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER} .", returnStdout: true).trim()
     echo "Docker Image built: ${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"
     return dockerImage
 }

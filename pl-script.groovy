@@ -1,4 +1,9 @@
-def dockerImage
+@CompileStatic
+class PipelineScript {
+    Object dockerImage  // assuming inside a class scope now
+
+    // methods remain the same
+}
 
 def checkoutCode() {
     git 'https://github.com/gornication/hrs_lab.git'

@@ -7,10 +7,10 @@ pipeline {
     }
 
     stages {
-        stage('init') {
+        stage('Load Script') {
             steps {
                 script {
-                    Object gv = load 'pl-script.groovy'
+                    gv = load 'pl-script.groovy'
                 }
             }
         }

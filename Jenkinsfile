@@ -9,14 +9,14 @@ pipeline {
     }
 
     stages {
-        stage('init') {
+        stage("init") {
             steps {
                 script {
-                    gv = load 'pl-script.groovy'
+                    gv = load "pl-script.groovy"
                 }
             }
         }
-        stage('Checkout') {
+        stage("Checkout") {
             steps {
                 script {
                     gv.checkoutCode()
@@ -24,7 +24,7 @@ pipeline {
             }
         }
 
-        stage('Syntax Check') {
+        stage("Syntax Check") {
             steps {
                 script {
                     gv.syntaxCheck()
@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage("Build Docker Image") {
             steps {
                 script {
                     gv.buildDockerImage()
@@ -40,7 +40,7 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        stage("Push Docker Image") {
             steps {
                 script {
                     gv.pushDockerImage()
@@ -48,7 +48,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage("Deploy to Kubernetes") {
             steps {
                 script {
                     gv.deployToKubernetes()

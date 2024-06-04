@@ -18,8 +18,8 @@ gv.buildDockerImage = {
 gv.pushDockerImage = { dockerImage ->
     withCredentials([usernamePassword(credentialsId: 'gornication-pipeline-lab-1', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
         sh "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
-        sh "docker push ${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"
-        sh "docker push ${env.DOCKER_HUB_REPO}:latest"
+        sh "/usr/local/bin/docker push ${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"
+        sh "/usr/local/bin/docker push ${env.DOCKER_HUB_REPO}:latest"
         echo "Docker Image pushed: ${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"
     }
 }

@@ -25,8 +25,8 @@ gv.pushDockerImage = { dockerImage ->
 
 gv.deployToKubernetes = { dockerImage ->
     sh """
-    kubectl set image deployment/your-deployment-name your-container-name=${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}
-    kubectl rollout status deployment/your-deployment-name
+    /usr/local/bin/kubectl set image deployment/web-app web-app=${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}
+    /usr/local/bin/kubectl rollout status deployment/web-app
     """
     echo "Deployment to Kubernetes completed"
 }
